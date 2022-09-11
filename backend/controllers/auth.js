@@ -1,5 +1,9 @@
 const asyncHandler = require('express-async-handler');
-const { validateEmail, validateLength } = require('../helpers/validation');
+const {
+  validateEmail,
+  validateLength,
+  validateUsername,
+} = require('../helpers/validation');
 const User = require('../models/User');
 
 // @desc Register User
@@ -43,10 +47,13 @@ exports.register = asyncHandler(async (req, res) => {
         'This email address already exists, try with a different email address',
     });
 
+  let tempUsername = first_name + last_name;
+  let newUsername = await validateUsername(tempUsername);
+
   const user = await new User({
     first_name,
     last_name,
-    username,
+    username: newUsername,
     email,
     password,
     bYear,
