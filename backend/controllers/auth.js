@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { validateEmail } = require('../helpers/validation');
 const User = require('../models/User');
 
 // @desc Register User
@@ -16,6 +17,10 @@ exports.register = asyncHandler(async (req, res) => {
     bDay,
     gender,
   } = req.body;
+
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email address' });
+  }
 
   const user = await new User({
     first_name,
