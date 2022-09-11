@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { generateToken } = require('../helpers/tokens');
 const {
   validateEmail,
   validateLength,
@@ -61,6 +62,13 @@ exports.register = asyncHandler(async (req, res) => {
     bDay,
     gender,
   }).save();
+
+  const emailVerificationToken = generateToken(
+    { id: user._id.toString() },
+    '30d'
+  );
+
+  console.log(emailVerificationToken);
 
   res.status(201).json(user);
 });
