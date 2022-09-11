@@ -18,9 +18,17 @@ exports.register = asyncHandler(async (req, res) => {
     gender,
   } = req.body;
 
-  if (!validateEmail(email)) {
+  if (!validateEmail(email))
     return res.status(400).json({ message: 'Invalid email address' });
-  }
+
+  const check = await User.findOne({ email });
+  if (check)
+    return res
+      .status(400)
+      .json({
+        message:
+          'This email address already exists, try with a different email address',
+      });
 
   const user = await new User({
     first_name,
