@@ -41,21 +41,21 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     gender: {
-      tyrpe: String,
+      type: String,
       trim: true,
       required: [true, 'Please enter gender'],
     },
-    BYear: {
+    bYear: {
       type: Number,
       required: true,
       trim: true,
     },
-    BMonth: {
+    bMonth: {
       type: Number,
       required: true,
       trim: true,
     },
-    BDay: {
+    bDay: {
       type: Number,
       required: true,
       trim: true,
