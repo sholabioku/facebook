@@ -31,6 +31,11 @@ exports.register = asyncHandler(async (req, res) => {
       .status(400)
       .json({ message: 'Lastname must be between 3 and 30 characters' });
 
+  if (!validateLength(password, 6, 40))
+    return res
+      .status(400)
+      .json({ message: 'Password must be between 6 and 40 characters' });
+
   const check = await User.findOne({ email });
   if (check)
     return res.status(400).json({
