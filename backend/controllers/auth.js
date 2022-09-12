@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { sendVerificationEmail } = require('../helpers/mailer');
 const { generateToken } = require('../helpers/tokens');
 const {
   validateEmail,
@@ -68,7 +69,8 @@ exports.register = asyncHandler(async (req, res) => {
     '30d'
   );
 
-  console.log(emailVerificationToken);
+  const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
+  sendVerificationEmail(user.email, user.first_name, url);
 
   res.status(201).json(user);
 });
