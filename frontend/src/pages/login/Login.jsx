@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import './style.css';
+import './login.css';
 
 const Login = () => {
   return (
