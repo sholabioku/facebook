@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const { sendVerificationEmail } = require('../helpers/mailer');
 const { generateToken } = require('../helpers/tokens');
@@ -87,7 +88,7 @@ exports.register = asyncHandler(async (req, res) => {
   });
 });
 
-exports.activateAccount = async (req, res) => {
+exports.activateAccount = asyncHandler(async (req, res) => {
   const { token } = req.body;
   const user = jwt.verify(token, process.env.TOKEN_SECRET);
   const check = await User.findById(user.id);
@@ -98,4 +99,33 @@ exports.activateAccount = async (req, res) => {
 
   await User.findByIdAndUpdate(user.id, { verified: true });
   res.status(200).json({ message: 'Account has been activated successfully' });
-};
+});
+
+exports.login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res.status(400).json({
+      message: 'The email address you entered is not connected to an account',
+    });
+
+  const matchPassword = await bcrypt.compare(password, user.password);
+  if (!matchPassword)
+    return res
+      .status(400)
+      .json({ message: 'Invalid credentials. please try again.' });
+
+  const token = generateToken({ id: user._id.toString() }, '7d');
+
+  res.send({
+    id: user._id,
+    username: user.username,
+    picture: user.picture,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    token,
+    verified: user.verified,
+    message: 'Register success! please activate your email to start',
+  });
+});
