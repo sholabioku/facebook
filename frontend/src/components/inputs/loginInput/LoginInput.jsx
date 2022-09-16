@@ -1,4 +1,4 @@
-import { useField } from 'formik';
+import { ErrorMessage, useField } from 'formik';
 import './loginInput.css';
 
 const LoginInput = ({ placeholder, ...props }) => {
@@ -6,6 +6,9 @@ const LoginInput = ({ placeholder, ...props }) => {
 
   return (
     <div className='input_wrap'>
+      <div>
+        {meta.touched && meta.error && <ErrorMessage name={field.name} />}
+      </div>
       <input
         type={field.type}
         name={field.name}

@@ -1,6 +1,8 @@
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+
 import LoginInput from '../../components/inputs/loginInput/LoginInput';
 
 import './login.css';
@@ -14,12 +16,18 @@ const Login = () => {
   const [login, setLogin] = useState(loginInfos);
   const { email, password } = login;
 
-  console.log(login);
-
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
+
+  const loginValidation = Yup.object({
+    email: Yup.string()
+      .required('Email address is required.')
+      .email('Must be a valid email')
+      .max(100),
+    password: Yup.string().required('Password is required.'),
+  });
 
   return (
     <div className='login'>
@@ -39,6 +47,7 @@ const Login = () => {
                   email,
                   password,
                 }}
+                validationSchema={loginValidation}
               >
                 {(formik) => (
                   <Form>
