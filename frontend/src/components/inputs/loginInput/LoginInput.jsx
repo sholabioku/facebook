@@ -7,8 +7,11 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
   return (
     <div className='input_wrap'>
       {meta.touched && meta.error && !bottom && (
-        <div className='input_error'>
+        <div className='input_error' style={{ transform: 'translateY(3px)' }}>
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
+          {meta.touched && meta.error && (
+            <div className='error_arrow_top'></div>
+          )}
         </div>
       )}
       <input
@@ -21,8 +24,11 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
       />
 
       {meta.touched && meta.error && bottom && (
-        <div className='input_error'>
+        <div className='input_error' style={{ transform: 'translateY(1px)' }}>
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
+          {meta.touched && meta.error && (
+            <div className='error_arrow_bottom'></div>
+          )}
         </div>
       )}
 
