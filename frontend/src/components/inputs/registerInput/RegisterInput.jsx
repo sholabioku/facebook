@@ -39,12 +39,7 @@ const RegisterInput = ({ placeholder, bottom, ...props }) => {
         </div>
       )}
 
-      {meta.touched && meta.error && (
-        <i
-          className='error_icon'
-          style={{ top: `${!bottom && !desktopView ? '63%' : '15px'}` }}
-        />
-      )}
+      {meta.touched && meta.error && <i className='error_icon' />}
     </div>
   );
 };
