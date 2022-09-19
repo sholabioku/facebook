@@ -48,12 +48,12 @@ const RegisterForm = () => {
     first_name: Yup.string()
       .required("What's your First name ?")
       .min(2, 'First name must be between 2 and 16 characters.')
-      .max(2, 'First name must be between 2 and 16 characters')
+      .max(16, 'First name must be between 2 and 16 characters')
       .matches(/^[aA-zZ]+$/, 'Numbers and special characters are not allowed.'),
     last_name: Yup.string()
       .required("What's your Last name ?")
       .min(2, 'Last name must be between 2 and 16 characters.')
-      .max(2, 'Last name must be between 2 and 16 characters')
+      .max(16, 'Last name must be between 2 and 16 characters')
       .matches(/^[aA-zZ]+$/, 'Numbers and special characters are not allowed.'),
     email: Yup.string()
       .required(
@@ -67,6 +67,9 @@ const RegisterForm = () => {
       .min(6, 'Password must be at least 6 characters')
       .max(36, "Password can't be more than 36 characters"),
   });
+
+  const [birthDateError, setBirthDateError] = useState('');
+
   return (
     <div className='blur'>
       <div className='register'>
@@ -88,6 +91,21 @@ const RegisterForm = () => {
             gender,
           }}
           validationSchema={registerValidation}
+          onSubmit={() => {
+            let current_date = new Date();
+            let picked_date = new Date(bYear, bMonth - 1, bDay);
+            let atLeats14Yrs = new Date(1970 + 14, 0, 1);
+            let atMost70Yrs = new Date(1970 + 70, 0, 1);
+            if (current_date - picked_date < atLeats14Yrs) {
+              setBirthDateError(
+                "it looks like you've entered the wrong info. Please make sure that you use your real date of birth."
+              );
+            } else if (current_date - picked_date > atMost70Yrs) {
+              setBirthDateError(
+                "it looks like you've entered the wrong info. Please make sure that you use your real date of birth."
+              );
+            }
+          }}
         >
           {(formik) => (
             <Form className='register_form'>
@@ -159,6 +177,9 @@ const RegisterForm = () => {
                       </option>
                     ))}
                   </select>
+                  {birthDateError && (
+                    <div className='input_error'>{birthDateError}</div>
+                  )}
                 </div>
               </div>
               <div className='reg_col'>
@@ -205,7 +226,9 @@ const RegisterForm = () => {
                 from us and can opt out at any time.
               </div>
               <div className='reg_btn_wrapper'>
-                <button className='blue_btn open_signup'>Sign Up</button>
+                <button type='submit' className='blue_btn open_signup'>
+                  Sign Up
+                </button>
               </div>
             </Form>
           )}
