@@ -73,6 +73,12 @@ const RegisterForm = () => {
   const [birthDateError, setBirthDateError] = useState('');
   const [genderError, setGenderError] = useState('');
 
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState('');
+
+  const registerSubmit = async () => {};
+
   return (
     <div className='blur'>
       <div className='register'>
@@ -115,6 +121,7 @@ const RegisterForm = () => {
             } else {
               setBirthDateError('');
               setGenderError('');
+              registerSubmit();
             }
           }}
         >
@@ -185,6 +192,8 @@ const RegisterForm = () => {
                   Sign Up
                 </button>
               </div>
+              {error && <div className='error_text'>{error}</div>}
+              {success && <div className='success_text'>{success}</div>}
             </Form>
           )}
         </Formik>
