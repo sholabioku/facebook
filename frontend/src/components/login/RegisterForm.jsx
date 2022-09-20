@@ -1,6 +1,8 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { DotLoader } from 'react-spinners';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 import RegisterInput from '../inputs/registerInput/RegisterInput';
 import DateOfBirthSelect from './DateOfBirthSelect';
@@ -75,9 +77,31 @@ const RegisterForm = () => {
 
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const registerSubmit = async () => {};
+  const registerSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/register`,
+        {
+          first_name,
+          last_name,
+          email,
+          password,
+          bYear,
+          bMonth,
+          bDay,
+          gender,
+        }
+      );
+      setError('');
+      setSuccess(data.message);
+    } catch (error) {
+      setLoading(false);
+      setSuccess('');
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <div className='blur'>
@@ -192,6 +216,7 @@ const RegisterForm = () => {
                   Sign Up
                 </button>
               </div>
+              <DotLoader color='#1876f2' loading={loading} size={30} />
               {error && <div className='error_text'>{error}</div>}
               {success && <div className='success_text'>{success}</div>}
             </Form>
