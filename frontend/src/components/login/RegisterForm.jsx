@@ -69,6 +69,7 @@ const RegisterForm = () => {
   });
 
   const [birthDateError, setBirthDateError] = useState('');
+  const [genderError, setGenderError] = useState('');
 
   return (
     <div className='blur'>
@@ -103,6 +104,10 @@ const RegisterForm = () => {
             } else if (current_date - picked_date > atMost70Yrs) {
               setBirthDateError(
                 "it looks like you've entered the wrong info. Please make sure that you use your real date of birth."
+              );
+            } else if (gender === '') {
+              setGenderError(
+                'Please choose a gender. You can change who can see this later.'
               );
             }
           }}
@@ -217,6 +222,9 @@ const RegisterForm = () => {
                       onChange={handleRegisterChange}
                     />
                   </label>
+                  {genderError && (
+                    <div className='input_error'>{genderError}</div>
+                  )}
                 </div>
               </div>
               <div className='reg_infos'>
