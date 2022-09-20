@@ -1,8 +1,23 @@
-import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const GenderSelect = ({ genderError, handleRegisterChange }) => {
+  const view1 = useMediaQuery({
+    query: '(min-width: 539px)',
+  });
+
+  const view2 = useMediaQuery({
+    query: '(min-width: 850px)',
+  });
+
+  const view3 = useMediaQuery({
+    query: '(min-width: 1170px)',
+  });
+
   return (
-    <div className='reg_grid'>
+    <div
+      className='reg_grid'
+      style={{ marginBottom: `${genderError && !view3 && '70px'}` }}
+    >
       <label htmlFor='male'>
         Male
         <input
@@ -33,7 +48,12 @@ const GenderSelect = ({ genderError, handleRegisterChange }) => {
           onChange={handleRegisterChange}
         />
       </label>
-      {genderError && <div className='input_error'>{genderError}</div>}
+      {genderError && (
+        <div className='input_error'>
+          <div className='error_arrow_bottom'></div>
+          {genderError}
+        </div>
+      )}
     </div>
   );
 };

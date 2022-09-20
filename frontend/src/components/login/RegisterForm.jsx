@@ -108,9 +108,13 @@ const RegisterForm = () => {
                 "it looks like you've entered the wrong info. Please make sure that you use your real date of birth."
               );
             } else if (gender === '') {
+              setBirthDateError('');
               setGenderError(
                 'Please choose a gender. You can change who can see this later.'
               );
+            } else {
+              setBirthDateError('');
+              setGenderError('');
             }
           }}
         >

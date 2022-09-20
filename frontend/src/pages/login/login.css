@@ -240,6 +240,14 @@
 }
 /*---- Footer ----*/
 
+/*---- DOB and Gender Errors ----*/
+.reg_grid .input_error {
+  width: 300px;
+  position: absolute;
+  top: 70px;
+}
+/*---- DOB and Gender Errors ----*/
+
 /*---- Media Quaries ----*/
 @media (min-width: 539px) {
   .login_footer_wrap {
