@@ -1,14 +1,20 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { DotLoader } from 'react-spinners';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import RegisterInput from '../inputs/registerInput/RegisterInput';
 import DateOfBirthSelect from './DateOfBirthSelect';
 import GenderSelect from './GenderSelect';
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const userInfos = {
     first_name: '',
     last_name: '',
@@ -96,6 +102,12 @@ const RegisterForm = () => {
       );
       setError('');
       setSuccess(data.message);
+      const { message, ...restOfUserData } = data;
+      setTimeout(() => {
+        dispatch({ type: 'LOGIN', payload: restOfUserData });
+      }, 2000);
+      Cookies.set('user', JSON.stringify(restOfUserData));
+      navigate('/');
     } catch (error) {
       setLoading(false);
       setSuccess('');
