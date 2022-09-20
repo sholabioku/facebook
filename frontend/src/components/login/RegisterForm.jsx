@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import RegisterInput from '../inputs/registerInput/RegisterInput';
+import DateOfBirthSelect from './DateOfBirthSelect';
+import GenderSelect from './GenderSelect';
 
 const RegisterForm = () => {
   const userInfos = {
@@ -148,84 +150,25 @@ const RegisterForm = () => {
                 <div className='reg_col_header'>
                   Date of birth <i className='info_icon' />
                 </div>
-                <div className='reg_grid'>
-                  <select
-                    name='bDay'
-                    value={bDay}
-                    onChange={handleRegisterChange}
-                  >
-                    {days.map((day, index) => (
-                      <option key={index} value={day}>
-                        {day}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    name='bMonth'
-                    value={bMonth}
-                    onChange={handleRegisterChange}
-                  >
-                    {months.map((month, index) => (
-                      <option value={month} key={index}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    name='bYear'
-                    value={bYear}
-                    onChange={handleRegisterChange}
-                  >
-                    {years.map((year, index) => (
-                      <option value={year} key={index}>
-                        {year}
-                      </option>
-                    ))}
-                  </select>
-                  {birthDateError && (
-                    <div className='input_error'>{birthDateError}</div>
-                  )}
-                </div>
+                <DateOfBirthSelect
+                  bYear={bYear}
+                  bMonth={bMonth}
+                  bDay={bDay}
+                  years={years}
+                  months={months}
+                  days={days}
+                  birthDateError={birthDateError}
+                  handleRegisterChange={handleRegisterChange}
+                />
               </div>
               <div className='reg_col'>
                 <div className='reg_col_header'>
                   Gender <i className='info_icon' />
                 </div>
-                <div className='reg_grid'>
-                  <label htmlFor='male'>
-                    Male
-                    <input
-                      type='radio'
-                      name='gender'
-                      id='male'
-                      value='male'
-                      onChange={handleRegisterChange}
-                    />
-                  </label>
-                  <label htmlFor='female'>
-                    Female
-                    <input
-                      type='radio'
-                      name='gender'
-                      id='female'
-                      value='female'
-                      onChange={handleRegisterChange}
-                    />
-                  </label>
-                  <label htmlFor='custom'>
-                    Custom
-                    <input
-                      type='radio'
-                      name='gender'
-                      id='custom'
-                      value='custom'
-                      onChange={handleRegisterChange}
-                    />
-                  </label>
-                  {genderError && (
-                    <div className='input_error'>{genderError}</div>
-                  )}
-                </div>
+                <GenderSelect
+                  genderError={genderError}
+                  handleRegisterChange={handleRegisterChange}
+                />
               </div>
               <div className='reg_infos'>
                 By clicking Sign Up, you agree to our{' '}
