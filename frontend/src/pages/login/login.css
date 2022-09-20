@@ -246,6 +246,10 @@
   position: absolute;
   top: 70px;
 }
+.input_error_select_large {
+  left: -97%;
+  top: 15px !important;
+}
 /*---- DOB and Gender Errors ----*/
 
 /*---- Media Quaries ----*/
