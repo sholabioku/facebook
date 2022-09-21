@@ -2,9 +2,18 @@ import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { DotLoader } from 'react-spinners';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 import LoginInput from '../inputs/loginInput/LoginInput';
 
 const LoginForm = ({ setVisible }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const loginInfos = {
     email: '',
     password: '',
@@ -26,6 +35,32 @@ const LoginForm = ({ setVisible }) => {
     password: Yup.string().required('Password is required.'),
   });
 
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const loginSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/login`,
+        {
+          email,
+          password,
+        }
+      );
+      setError('');
+      setSuccess(data.message);
+
+      dispatch({ type: 'LOGIN', payload: data });
+      Cookies.set('user', JSON.stringify(data));
+      navigate('/');
+    } catch (error) {
+      setLoading(false);
+      setSuccess('');
+      setError(error.response.data.message);
+    }
+  };
+
   return (
     <div className='login_wrap'>
       <div className='login_1'>
@@ -43,6 +78,9 @@ const LoginForm = ({ setVisible }) => {
               password,
             }}
             validationSchema={loginValidation}
+            onSubmit={() => {
+              loginSubmit();
+            }}
           >
             {(formik) => (
               <Form>
@@ -68,6 +106,8 @@ const LoginForm = ({ setVisible }) => {
           <Link to='/forgot' className='forgot_password'>
             Forgotten password?
           </Link>
+          {error && <div className='error_text'>{error}</div>}
+          {success && <div className='success_text'>{success}</div>}
           <div className='sign_splitter'></div>
           <button
             className='blue_btn open_signup'

@@ -126,6 +126,5 @@ exports.login = asyncHandler(async (req, res) => {
     last_name: user.last_name,
     token,
     verified: user.verified,
-    message: 'Register success! please activate your email to start',
   });
 });
