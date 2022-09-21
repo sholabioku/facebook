@@ -11,7 +11,7 @@ import RegisterInput from '../inputs/registerInput/RegisterInput';
 import DateOfBirthSelect from './DateOfBirthSelect';
 import GenderSelect from './GenderSelect';
 
-const RegisterForm = () => {
+const RegisterForm = ({ setVisible }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -119,7 +119,7 @@ const RegisterForm = () => {
     <div className='blur'>
       <div className='register'>
         <div className='register_header'>
-          <i className='exit_icon' />
+          <i className='exit_icon' onClick={() => setVisible(false)} />
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import LoginInput from '../inputs/loginInput/LoginInput';
 
-const LoginForm = () => {
+const LoginForm = ({ setVisible }) => {
   const loginInfos = {
     email: '',
     password: '',
@@ -69,7 +69,12 @@ const LoginForm = () => {
             Forgotten password?
           </Link>
           <div className='sign_splitter'></div>
-          <button className='blue_btn open_signup'>Create Account</button>
+          <button
+            className='blue_btn open_signup'
+            onClick={() => setVisible(true)}
+          >
+            Create Account
+          </button>
         </div>
         <Link to='/' className='sign_extra'>
           <b>Create a Page</b> for a celebrity, brand or business
