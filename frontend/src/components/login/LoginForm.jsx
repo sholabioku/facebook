@@ -41,6 +41,7 @@ const LoginForm = ({ setVisible }) => {
 
   const loginSubmit = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/login`,
         {
@@ -106,6 +107,7 @@ const LoginForm = ({ setVisible }) => {
           <Link to='/forgot' className='forgot_password'>
             Forgotten password?
           </Link>
+          <DotLoader color='#1876f2' loading={loading} size={30} />
           {error && <div className='error_text'>{error}</div>}
           {success && <div className='success_text'>{success}</div>}
           <div className='sign_splitter'></div>
