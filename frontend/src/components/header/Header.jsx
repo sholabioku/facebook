@@ -16,33 +16,34 @@ import { useSelector } from 'react-redux';
 
 import './header.css';
 import SearchMenu from './SearchMenu';
+import { useState } from 'react';
 
 const Header = () => {
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
   const { user } = useSelector((user) => ({ ...user }));
-  console.log(user);
 
   const color = '#65676b';
 
   return (
     <header>
       <div className='header_left'>
-        <div style={{ display: 'none' }}>
-          <Link to='/' className='header_logo'>
-            <div className='circle'>
-              <Logo />
-            </div>
-          </Link>
-          <div className='search search1'>
-            <Search color={color} />
-            <input
-              type='text'
-              placeholder='Search Facebook'
-              className='hide_input'
-            />
+        <Link to='/' className='header_logo'>
+          <div className='circle'>
+            <Logo />
           </div>
+        </Link>
+        <div className='search search1' onClick={() => setShowSearchMenu(true)}>
+          <Search color={color} />
+          <input
+            type='text'
+            placeholder='Search Facebook'
+            className='hide_input'
+          />
         </div>
       </div>
-      <SearchMenu color={color} />
+      {showSearchMenu && (
+        <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} />
+      )}
       <div className='header_middle'>
         <Link to='/' className='middle_icon active'>
           <HomeActive />
