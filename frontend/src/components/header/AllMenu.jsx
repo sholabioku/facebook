@@ -1,4 +1,4 @@
-import { menu } from '../../data/allMenu';
+import { create, menu } from '../../data/allMenu';
 import AllMenuItem from './AllMenuItem';
 
 const AllMenu = () => {
@@ -18,6 +18,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -28,6 +29,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -38,6 +40,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -48,6 +51,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -58,6 +62,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -68,6 +73,7 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
@@ -78,9 +84,21 @@ const AllMenu = () => {
                 name={item.name}
                 description={item.description}
                 icon={item.icon}
+                key={index}
               />
             ))}
           </div>
+        </div>
+        <div className='all_right'>
+          <div className='all_right_header'>Create</div>
+          {create.map((item, index) => (
+            <div className='all_right_item hover1'>
+              <div className='all_right_circle'>
+                <i className={item.icon} />
+              </div>
+              {item.name}
+            </div>
+          ))}
         </div>
       </div>
     </div>
