@@ -19,6 +19,7 @@ import SearchMenu from './SearchMenu';
 import { useRef, useState } from 'react';
 import AllMenu from './AllMenu';
 import useClickOutside from '../../helpers/clickOutside';
+import UserMenu from './UserMenu';
 
 const Header = () => {
   const allMenu = useRef(null);
@@ -92,6 +93,7 @@ const Header = () => {
         </div>
         <div className='circle_icon hover1'>
           <ArrowDown />
+          <UserMenu user={user} />
         </div>
       </div>
     </header>
