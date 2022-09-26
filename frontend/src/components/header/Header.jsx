@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import './header.css';
 import SearchMenu from './SearchMenu';
 import { useState } from 'react';
+import AllMenu from './AllMenu';
 
 const Header = () => {
   const [showSearchMenu, setShowSearchMenu] = useState(false);
@@ -69,6 +70,7 @@ const Header = () => {
         </Link>
         <div className='circle_icon hover1'>
           <Menu />
+          <AllMenu />
         </div>
         <div className='circle_icon hover1'>
           <Messenger />
