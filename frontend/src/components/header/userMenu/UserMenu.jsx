@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import DisplayAccessibilty from './DisplayAccessibilty';
 import HelpSupport from './HelpSupport';
 import SettingsPrivacy from './SettingsPrivacy';
 
@@ -48,7 +49,7 @@ const UserMenu = ({ user }) => {
               <i className='right_icon' />
             </div>
           </div>
-          <div className='menu_item hover3'>
+          <div className='menu_item hover3' onClick={() => setVisible(3)}>
             <div className='small_circle'>
               <i className='dark_filled_icon' />
             </div>
@@ -67,6 +68,7 @@ const UserMenu = ({ user }) => {
       )}
       {visible === 1 && <SettingsPrivacy setVisible={setVisible} />}
       {visible === 2 && <HelpSupport setVisible={setVisible} />}
+      {visible === 3 && <DisplayAccessibilty setVisible={setVisible} />}
     </div>
   );
 };
