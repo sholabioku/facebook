@@ -13,8 +13,7 @@ const UserMenu = ({ user }) => {
             <img src={user?.picture} alt='' />
             <div className='menu_col'>
               <span>
-                {user?.first_name}
-                {user?.last_name}
+                {user?.first_name} {user?.last_name}
               </span>
               <span>See your profile</span>
             </div>
