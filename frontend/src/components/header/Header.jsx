@@ -19,7 +19,7 @@ import SearchMenu from './SearchMenu';
 import { useRef, useState } from 'react';
 import AllMenu from './AllMenu';
 import useClickOutside from '../../helpers/clickOutside';
-import UserMenu from './UserMenu';
+import UserMenu from './userMenu/UserMenu';
 
 const Header = () => {
   const allMenu = useRef(null);
