@@ -29,7 +29,7 @@ const UserMenu = ({ user }) => {
             </div>
           </div>
           <div className='menu_splitter'></div>
-          <div className='menu_item hover3'>
+          <div className='menu_item hover3' onClick={() => setVisible(1)}>
             <div className='small_circle'>
               <i className='settings_filled_icon' />
             </div>
@@ -64,7 +64,7 @@ const UserMenu = ({ user }) => {
           </div>
         </div>
       )}
-      {visible === 1 && <SettingsPrivacy />}
+      {visible === 1 && <SettingsPrivacy setVisible={setVisible} />}
     </div>
   );
 };
