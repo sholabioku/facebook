@@ -487,6 +487,15 @@ header {
 }
 /*-------User menu----*/
 
+/* Active Header */
+.active_header {
+  background: var(--light-blue-color);
+}
+.active_header svg {
+  fill: var(--blue-color);
+}
+/* Active Header */
+
 /* Responsive Header */
 @media (max-width: 1295px) {
   .middle_icon {
