@@ -4,6 +4,7 @@ import Header from '../../components/header/Header';
 import LeftHome from '../../components/home/leftHome/LeftHome';
 
 import './home.css';
+import RightHome from './rightHome/RightHome';
 
 const Home = () => {
   const { user } = useSelector((user) => ({ ...user }));
@@ -12,6 +13,7 @@ const Home = () => {
     <div>
       <Header />
       <LeftHome user={user} />
+      <RightHome user={user} />
     </div>
   );
 };
