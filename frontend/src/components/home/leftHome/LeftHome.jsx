@@ -5,6 +5,7 @@ import LeftLink from './LeftLink';
 import { ArrowDown1 } from '../../../svg';
 
 import './leftHome.css';
+import Shortcut from './Shortcut';
 
 const LeftHome = ({ user }) => {
   const [visible, setVisible] = useState(false);
@@ -51,6 +52,39 @@ const LeftHome = ({ user }) => {
           </div>
         </div>
       )}
+      <div className='splitter'></div>
+      <div className='shortcut'>
+        <div className='heading'>Your Shortcuts</div>
+        <div className='edit_shortcut'>Edit</div>
+      </div>
+      <div className='shortcut_list'>
+        <Shortcut
+          link='https://www.youtube.com/channel/UCAZ6P7z71OB_5MLjfbIKLNA/featured'
+          img='../../images/ytb.png'
+          name='My Youtube Channel'
+        />
+        <Shortcut
+          link='https://www.instagram.com/realbilush/'
+          img='../../images/insta.png'
+          name='My Instagram'
+        />
+      </div>
+      <div className={`fb_copyright ${visible && 'relative_fb_copyright'}`}>
+        <Link to='/'>Privacy </Link>
+        <span>. </span>
+        <Link to='/'>Terms </Link>
+        <span>. </span>
+        <Link to='/'>Advertising </Link>
+        <span>. </span>
+        <Link to='/'>
+          Ad Choices <i className='ad_choices_icon'></i>{' '}
+        </Link>
+        <span>. </span>
+        <Link to='/'></Link>Cookies <span>. </span>
+        <Link to='/'>More </Link>
+        <span>. </span> <br />
+        Meta © 2022
+      </div>
     </div>
   );
 };
