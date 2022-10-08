@@ -88,6 +88,9 @@ exports.register = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc Activate account
+// @route POST /activate
+// @access Private
 exports.activateAccount = asyncHandler(async (req, res) => {
   const { token } = req.body;
   const user = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -101,6 +104,9 @@ exports.activateAccount = asyncHandler(async (req, res) => {
   res.status(200).json({ message: 'Account has been activated successfully' });
 });
 
+// @desc Login User
+// @route POST /login
+// @access Public
 exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
