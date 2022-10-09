@@ -6,7 +6,7 @@ import LeftHome from '../../components/home/leftHome/LeftHome';
 import Stories from '../../components/home/stories/Stories';
 
 import './home.css';
-import RightHome from './rightHome/RightHome';
+import RightHome from '../../components/home/rightHome/RightHome';
 
 const Home = () => {
   const { user } = useSelector((user) => ({ ...user }));
