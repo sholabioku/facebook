@@ -98,7 +98,7 @@ exports.activateAccount = asyncHandler(async (req, res) => {
   if (check.verified === true)
     return res
       .status(400)
-      .json({ message: 'This account is already acctivated' });
+      .json({ message: 'This account is already activated' });
 
   await User.findByIdAndUpdate(user.id, { verified: true });
   res.status(200).json({ message: 'Account has been activated successfully' });

@@ -5,9 +5,9 @@ const ActivateForm = ({ type, header, text, loading }) => {
     <div className='blur'>
       <div className='popup'>
         <div
-          className={`popup_header ${(type = 'success'
-            ? 'success_text'
-            : 'error_text')}`}
+          className={`popup_header ${
+            type === 'success' ? 'success_text' : 'error_text'
+          }`}
         >
           {header}
         </div>
