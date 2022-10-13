@@ -18,7 +18,7 @@ const Home = () => {
       <LeftHome user={user} />
       <div className='home_middle'>
         <Stories />
-        <SendVerification />
+        {user.verified === false && <SendVerification user={user} />}
         <CreatePost user={user} />
       </div>
       <RightHome user={user} />
