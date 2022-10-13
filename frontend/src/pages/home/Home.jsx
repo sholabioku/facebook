@@ -7,6 +7,7 @@ import Stories from '../../components/home/stories/Stories';
 import RightHome from '../../components/home/rightHome/RightHome';
 
 import './home.css';
+import SendVerification from '../../components/home/sendVerification/SendVerification';
 
 const Home = () => {
   const { user } = useSelector((user) => ({ ...user }));
@@ -17,6 +18,7 @@ const Home = () => {
       <LeftHome user={user} />
       <div className='home_middle'>
         <Stories />
+        <SendVerification />
         <CreatePost user={user} />
       </div>
       <RightHome user={user} />
