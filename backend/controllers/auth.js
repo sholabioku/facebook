@@ -140,3 +140,28 @@ exports.login = asyncHandler(async (req, res) => {
     verified: user.verified,
   });
 });
+
+// @desc Resend Verification code
+// @route POST /sendVerification
+// @access Private
+exports.sendVerification = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId);
+
+  if (user.verified === true)
+    return res
+      .status(400)
+      .json({ message: 'This account is already activated' });
+
+  const emailVerificationToken = generateToken(
+    { id: user._id.toString() },
+    '30d'
+  );
+
+  const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
+  sendVerificationEmail(user.email, user.first_name, url);
+
+  res
+    .status(200)
+    .json({ message: 'Email verification link has been sent to your email' });
+});
