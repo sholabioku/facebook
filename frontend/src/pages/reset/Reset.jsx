@@ -8,6 +8,7 @@ import SearchAccount from './SearchAccount';
 import SendEmail from './SendEmail';
 import CodeVerification from './CodeVerification';
 import Footer from '../../components/login/Footer';
+import ChangePassword from './ChangePassword';
 
 const Reset = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,10 @@ const Reset = () => {
 
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [visible, setVisible] = useState(2);
+  const [visible, setVisible] = useState(3);
 
   const logout = () => {
     Cookies.set('user', '');
@@ -57,7 +60,21 @@ const Reset = () => {
         )}
         {visible === 1 && <SendEmail user={user} />}
         {visible === 2 && (
-          <CodeVerification code={code} setCode={setCode} error={error} />
+          <CodeVerification
+            user={user}
+            code={code}
+            setCode={setCode}
+            error={error}
+          />
+        )}
+        {visible === 3 && (
+          <ChangePassword
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            error={error}
+          />
         )}
       </div>
       <Footer />
