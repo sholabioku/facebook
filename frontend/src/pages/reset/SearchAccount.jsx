@@ -1,9 +1,18 @@
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+
 import LoginInput from '../../components/inputs/loginInput/LoginInput';
 
 const SearchAccount = ({ email, setEmail, error }) => {
+  const validateEmail = Yup.object({
+    email: Yup.string()
+      .required('Email address is required')
+      .email('Must be a valid email address')
+      .max(50, "Email address can't exceed 50 characters"),
+  });
+
   return (
     <div className='reset_form'>
       <div className='reset_form_header'>Find Your Account</div>
@@ -16,6 +25,7 @@ const SearchAccount = ({ email, setEmail, error }) => {
         initialValues={{
           email,
         }}
+        validationSchema={validateEmail}
       >
         {(formik) => (
           <Form>
