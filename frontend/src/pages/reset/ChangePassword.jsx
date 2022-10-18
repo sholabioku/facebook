@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik';
-
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+
 import LoginInput from '../../components/inputs/loginInput/LoginInput';
 
 const ChangePassword = ({
@@ -10,6 +11,18 @@ const ChangePassword = ({
   setConfirmPassword,
   error,
 }) => {
+  const validatePassword = Yup.object({
+    password: Yup.string()
+      .required(
+        'Enter a combination of atleast six numbers, letters and punctuation marks(such as ! and &).'
+      )
+      .min(6, 'Password must be at least 6 characters')
+      .max(36, "Password can't be more than 36 characters"),
+    confirmPassword: Yup.string()
+      .required('Confirm your password')
+      .oneOf([Yup.ref('password')], 'Password must match'),
+  });
+
   return (
     <div className='reset_form' style={{ height: '310px' }}>
       <div className='reset_form_header'>Change Password</div>
@@ -20,6 +33,7 @@ const ChangePassword = ({
           password,
           confirmPassword,
         }}
+        validationSchema={validatePassword}
       >
         {(formik) => (
           <Form>

@@ -21,7 +21,7 @@ const Reset = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [visible, setVisible] = useState(2);
+  const [visible, setVisible] = useState(3);
 
   const logout = () => {
     Cookies.set('user', '');
