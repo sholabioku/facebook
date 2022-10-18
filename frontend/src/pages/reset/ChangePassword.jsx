@@ -38,16 +38,17 @@ const ChangePassword = ({
         {(formik) => (
           <Form>
             <LoginInput
-              type='text'
+              type='password'
               name='password'
               onChange={(e) => setPassword(e.target.value)}
               placeholder='New password'
             />
             <LoginInput
-              type='text'
+              type='password'
               name='confirmPassword'
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder='Confirm new password'
+              bottom
             />
             {error && <div className='error_text'>{error}</div>}
             <div className='reset_form_btns'>
