@@ -165,3 +165,14 @@ exports.sendVerification = asyncHandler(async (req, res) => {
     .status(200)
     .json({ message: 'Email verification link has been sent to your email' });
 });
+
+// @desc Find User
+// @route POST /findUser
+// @access Public
+exports.findUser = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email }).select('-password');
+  if (!user) return res.status(400).json({ message: 'Account does not exist' });
+
+  res.status(200).json({ email: user.email, picture: user.picture });
+});
