@@ -21,6 +21,8 @@ const Reset = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [userInfos, setUserInfos] = useState('');
   const [visible, setVisible] = useState(0);
 
   const logout = () => {
@@ -30,6 +32,9 @@ const Reset = () => {
     });
     navigate('/login');
   };
+
+  console.log(userInfos);
+
   return (
     <div className='reset'>
       <div className='reset_header'>
@@ -56,9 +61,17 @@ const Reset = () => {
       </div>
       <div className='reset_wrap'>
         {visible === 0 && (
-          <SearchAccount email={email} setEmail={setEmail} error={error} />
+          <SearchAccount
+            email={email}
+            setEmail={setEmail}
+            error={error}
+            setError={setError}
+            setLoading={setLoading}
+            setUserInfos={setUserInfos}
+            setVisible={setVisible}
+          />
         )}
-        {visible === 1 && <SendEmail user={user} />}
+        {visible === 1 && userInfos && <SendEmail userInfos={userInfos} />}
         {visible === 2 && (
           <CodeVerification
             user={user}
